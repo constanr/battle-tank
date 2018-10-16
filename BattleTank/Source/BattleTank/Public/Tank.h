@@ -7,7 +7,6 @@
 #include "Tank.generated.h"
 
 class UTankAimingComponent;
-class UTankMovementComponent;
 class UTankBarrel;
 class UTankTurret;
 class AProjectile;
@@ -32,9 +31,6 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "Input")
 	UTankAimingComponent* TankAimingComponent = nullptr;
-
-	UPROPERTY(BlueprintReadOnly, Category = "Input")
-	UTankMovementComponent* TankMovementComponent = nullptr;
 
 private:
 
