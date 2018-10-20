@@ -43,7 +43,7 @@ protected:
 	EFiringState FiringState = EFiringState::Reloading;
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
-	int GetAmmoLeft() const;
+	int32 GetAmmoLeft() const;
 
 private:
 	// Sets default values for this component's properties
@@ -69,9 +69,10 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float ReloadTimeInSeconds = 3;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	int32 AmmoLeft = 5;
+
 	double LastFireTime = 0;
 
 	FVector AimDirection;
-	
-	int AmmoLeft = 5;
 };
