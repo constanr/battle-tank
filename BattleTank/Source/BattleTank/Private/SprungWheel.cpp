@@ -11,8 +11,14 @@ ASprungWheel::ASprungWheel()
 	MassWheelConstraint = CreateDefaultSubobject<UPhysicsConstraintComponent>(FName("MassWheelConstraint"));
 	SetRootComponent(MassWheelConstraint);
 
-	Wheel = CreateDefaultSubobject<UStaticMeshComponent>(FName("Wheel"));
-	Wheel->SetupAttachment(MassWheelConstraint);
+	Axle = CreateDefaultSubobject<USphereComponent>(FName("Axle"));
+	Axle->SetupAttachment(MassWheelConstraint);
+
+	AxleWheelConstraint = CreateDefaultSubobject<UPhysicsConstraintComponent>(FName("AxleWheelConstraint"));
+	AxleWheelConstraint->SetupAttachment(Axle);
+
+	Wheel = CreateDefaultSubobject<USphereComponent>(FName("Wheel"));
+	Wheel->SetupAttachment(Axle);
 
 }
 
@@ -29,7 +35,8 @@ void ASprungWheel::SetupConstraint()
 	if (!GetAttachParentActor()) return;
 	UPrimitiveComponent* BodyRoot = Cast<UPrimitiveComponent>(GetAttachParentActor()->GetRootComponent());
 	if (!BodyRoot) return;
-	MassWheelConstraint->SetConstrainedComponents(BodyRoot, FName(NAME_None), Wheel, FName(NAME_None));
+	MassWheelConstraint->SetConstrainedComponents(BodyRoot, FName(NAME_None), Axle, FName(NAME_None));
+	AxleWheelConstraint->SetConstrainedComponents(Axle, FName(NAME_None), Wheel, FName(NAME_None));
 }
 
 // Called every frame
